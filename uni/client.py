@@ -4,11 +4,12 @@ import urllib.parse
 import time
 import hmac
 import json
+from urllib.parse import urlparse
 from uni.response import UniResponse
 from uni.services import (MessageService)
 from uni.__version__ import __version__
 
-DEFAULT_ENDPOINT = "api.unimtx.com"
+DEFAULT_ENDPOINT = "https://api.unimtx.com"
 DEFAULT_SIGNING_ALGORITHM = "hmac-sha256"
 
 class UniClient:
@@ -38,7 +39,11 @@ class UniClient:
     return query;
 
   def request(self, action, data):
-    conn = http.client.HTTPSConnection(self.endpoint)
+    url = urlparse(self.endpoint)
+    if url.scheme == "https":
+      conn = http.client.HTTPSConnection(url.hostname, url.port or 443)
+    else:
+      conn = http.client.HTTPConnection(url.hostname, url.port or 80)
     headers = {
       "User-Agent": self.name + "/" + self.version,
       "Content-Type": "application/json;charset=utf-8",
