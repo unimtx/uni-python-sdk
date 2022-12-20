@@ -59,6 +59,8 @@ To find Unimatrix SDKs in other programming languages, check out the list below:
 - [Go](https://github.com/unimtx/uni-go-sdk)
 - [Node.js](https://github.com/unimtx/uni-node-sdk)
 - [PHP](https://github.com/unimtx/uni-php-sdk)
+- [Ruby](https://github.com/unimtx/uni-ruby-sdk)
+- [.NET](https://github.com/unimtx/uni-dotnet-sdk)
 
 ## License
 
