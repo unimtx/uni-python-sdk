@@ -24,5 +24,6 @@ class UniResponse:
     else:
       raise UniException(status_text, -1, request_id=request_id)
 
+    self.status = status
     self.raw = res
     self.request_id = request_id

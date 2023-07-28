@@ -15,7 +15,7 @@ DESCRIPTION = 'The official Unimatrix SDK for Python.'
 URL = 'https://github.com/unimtx/uni-python-sdk'
 AUTHOR = 'Unimatrix'
 EMAIL = 'dev@unimtx.com'
-KEYWORDS = ['unimatrix', 'unisdk', 'sms', 'messaging', '2fa', 'verification', 'sdk', 'api']
+KEYWORDS = ['unimatrix', 'unisdk', 'sms', 'messaging', '2fa', 'otp', 'verification', 'sdk', 'api']
 REQUIRES_PYTHON = '>=3.6.0'
 VERSION = None
 

@@ -6,7 +6,7 @@ import hmac
 import json
 from urllib.parse import urlparse
 from uni.response import UniResponse
-from uni.services import (MessageService)
+from uni.services import (MessageService, OtpService)
 from uni.__version__ import __version__
 
 DEFAULT_ENDPOINT = "https://api.unimtx.com"
@@ -16,14 +16,15 @@ class UniClient:
   name = "uni-python-sdk"
   version = __version__
 
-  def __init__(self, access_key_id, access_key_secret=None, endpoint=DEFAULT_ENDPOINT, signing_algorithm=DEFAULT_SIGNING_ALGORITHM):
-    self.access_key_id = access_key_id
-    self.access_key_secret = access_key_secret
-    self.endpoint = endpoint
+  def __init__(self, access_key_id = None, access_key_secret=None, endpoint=None, signing_algorithm=DEFAULT_SIGNING_ALGORITHM):
+    self.access_key_id = access_key_id or os.environ.get("UNIMTX_ACCESS_KEY_ID")
+    self.access_key_secret = access_key_secret or os.environ.get("UNIMTX_ACCESS_KEY_SECRET")
+    self.endpoint = endpoint or os.environ.get("UNIMTX_ENDPOINT") or DEFAULT_ENDPOINT
     self.signing_algorithm = signing_algorithm
     self.hmac_algorithm = signing_algorithm.split("-")[1]
 
     self.messages = MessageService(self)
+    self.otp = OtpService(self)
 
   def __sign(self, query):
     if (self.access_key_secret != None):

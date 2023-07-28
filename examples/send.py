@@ -7,8 +7,7 @@ def example():
   try:
     res = client.messages.send({
       "to": "your phone number", # in E.164 format
-      "signature": "your sender name",
-      "content": "Your verification code is 2048."
+      "text": "Your verification code is 2048."
     })
     print(res.data)
   except UniException as e:

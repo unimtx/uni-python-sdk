@@ -26,27 +26,78 @@ pip install uni-sdk
 
 The following example shows how to use the Unimatrix Python SDK to interact with Unimatrix services.
 
+### Initialize a client
+
+```py
+from uni.client import UniClient
+
+client = UniClient("your access key id", "your access key secret")
+```
+
+or you can configure your credentials by environment variables:
+
+```sh
+export UNIMTX_ACCESS_KEY_ID=your_access_key_id
+export UNIMTX_ACCESS_KEY_SECRET=your_access_key_secret
+```
+
 ### Send SMS
 
 Send a text message to a single recipient.
 
 ```py
-
 from uni.client import UniClient
 from uni.exception import UniException
 
-client = UniClient("your access key id", "your access key secret")
+client = UniClient()
 
 try:
   res = client.messages.send({
-    "to": "your phone number", # in E.164 format
-    "signature": "your sender name",
-    "content": "Your verification code is 2048."
+    "to": "+1206880xxxx", # in E.164 format
+    "text": "Your verification code is 2048."
   })
   print(res.data)
 except UniException as e:
   print(e)
+```
 
+### Send verification code
+
+Send a one-time passcode (OTP) to a recipient. The following example will automatically generate a verification code.
+
+```py
+from uni.client import UniClient
+from uni.exception import UniException
+
+client = UniClient()
+
+try:
+  res = client.otp.send({
+    "to": "+1206880xxxx"
+  })
+  print(res.data)
+except UniException as e:
+  print(e)
+```
+
+### Check verification code
+
+Verify the one-time passcode (OTP) that a user provided. The following example will check whether the user-provided verification code is correct.
+
+```py
+from uni.client import UniClient
+from uni.exception import UniException
+
+client = UniClient()
+
+try:
+  res = client.otp.verify({
+    "to": "+1206880xxxx",
+    "code": "123456" # the code user provided
+  })
+  print(res.valid)
+except UniException as e:
+  print(e)
 ```
 
 ## Reference
