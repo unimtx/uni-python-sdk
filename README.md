@@ -63,7 +63,7 @@ except UniException as e:
 
 ### Send verification code
 
-Send a one-time passcode (OTP) to a recipient. The following example will automatically generate a verification code.
+Send a one-time passcode (OTP) to a recipient. The following example will send a automatically generated verification code to the user.
 
 ```py
 from uni.client import UniClient
@@ -71,13 +71,10 @@ from uni.exception import UniException
 
 client = UniClient()
 
-try:
-  res = client.otp.send({
-    "to": "+1206880xxxx"
-  })
-  print(res.data)
-except UniException as e:
-  print(e)
+res = client.otp.send({
+  "to": "+1206880xxxx"
+})
+print(res.data)
 ```
 
 ### Check verification code
@@ -90,14 +87,11 @@ from uni.exception import UniException
 
 client = UniClient()
 
-try:
-  res = client.otp.verify({
-    "to": "+1206880xxxx",
-    "code": "123456" # the code user provided
-  })
-  print(res.valid)
-except UniException as e:
-  print(e)
+res = client.otp.verify({
+  "to": "+1206880xxxx",
+  "code": "123456" # the code user provided
+})
+print(res.valid)
 ```
 
 ## Reference
